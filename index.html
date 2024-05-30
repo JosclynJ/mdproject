@@ -1,298 +1,218 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Data Mahasiswa</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-<body style="font-family: Poppins; background-color: #DED6C9;">
-    <div class="container">
-        <div class="card shadow-lg mt-5 p-4 rounded-3" style="background-color: #F7F2ED;">
-            <h4 class="text-center text-uppercase fw-bold">Data Mahasiswa</h4>
-            <div class="d-flex mb-3">
-                <button class="btn btn-success btn-sm me-auto" data-bs-toggle="modal" data-bs-target="#modalCreate">Tambah</button>
+<html>
+  <head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dark Admin by Bootstrapious.com</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Choices.js-->
+    <link rel="stylesheet" href="vendor/choices.js/public/assets/styles/choices.min.css">
+    <!-- Google fonts - Muli-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body>
+    <div class="d-flex align-items-stretch">
+      <!-- Sidebar Navigation-->
+      <nav id="sidebar">
+        <!-- Sidebar Header-->
+        <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle" src="img/avatar-6.jpg" alt="...">
+          <div class="ms-3 title">
+            <h1 class="h5 mb-1">Nama</h1>
+            <p class="text-sm text-gray-700 mb-0 lh-1">NIM</p>
+          </div>
+        </div><span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
+        <ul class="list-unstyled">
+              <li class="sidebar-item active"><a class="sidebar-link" href="index.html"> 
+                <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                  <use xlink:href="#real-estate-1"> </use>
+                </svg><span>Home </span></a>
+              </li>
+        </ul>
+        <span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Extras</span>
+        <ul class="list-unstyled">
+          <li class="sidebar-item"><a class="sidebar-link" href="login.html"> 
+            <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+              <use xlink:href="#disable-1"> </use>
+            </svg><span>Logout </span></a>
+          </li>
+        </ul>
+      </nav>
+      <div class="page-content">
+            <!-- Page Header-->
+            <div class="bg-dash-dark-2 py-4">
+              <div class="container-fluid">
+                <h2 class="h5 mb-0">Dashboard</h2>
+              </div>
             </div>
-            <table id="mahasiswa-table" class="table table-striped border shadow-lg" style="font-size: 15px;">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>NIM</th>
-                        <th>Nama</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Program Studi</th>
-                        <th>Alamat</th>
-                        <th>Telepon</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="table-data">
-                    <!-- Data Mahasiswa akan ditampilkan di sini -->
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- Modal Create -->
-    <div class="modal fade" id="modalCreate" tabindex="-1" aria-labelledby="modalCreateLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalCreateLabel">Tambah Mahasiswa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <section class="pt-0">
+              <div class="container-fluid">
+                <div class="row-gy-4">
+                  <div class="col">
+                    <div class="card mt-4">
+                      <div class="card-header">
+                        <h3 class="h4 mb-0">Biodata Mahasiswa</h3>
+                      </div>
+                      <div class="card-body pt-0">  
+                        <form>
+                          <div class="row">
+                            <label class="col-sm-3 form-label">NIM</label>
+                            <div class="col-sm-9">
+                              <input class="form-control text-dark" type="text" readonly>
+                            </div>
+                          </div>
+                          <div class="my-4"></div>
+                          <div class="row">
+                            <label class="col-sm-3 form-label">Nama</label>
+                            <div class="col-sm-9">
+                              <input class="form-control text-dark" type="text" readonly>
+                            </div>
+                          </div>
+                          <div class="my-4"></div>
+                          <div class="row">
+                            <label class="col-sm-3 form-label">Jenis Kelamin</label>
+                            <div class="col-sm-9">
+                              <input class="form-control text-dark" type="text" readonly>
+                            </div>
+                          </div>
+                          <div class="my-4"></div>
+                          <div class="row">
+                            <label class="col-sm-3 form-label">Program Studi</label>
+                            <div class="col-sm-9">
+                              <input class="form-control text-dark" type="text" readonly>
+                            </div>
+                          </div>
+                          <div class="my-4"></div>
+                          <div class="row">
+                            <label class="col-sm-3 form-label">Alamat</label>
+                            <div class="col-sm-9">
+                              <input class="form-control text-dark" type="text" readonly>
+                            </div>
+                          </div>
+                          <div class="my-4"></div>
+                          <div class="row">
+                            <label class="col-sm-3 form-label">Nomor telepon</label>
+                            <div class="col-sm-9">
+                              <input class="form-control text-dark" type="text" readonly>
+                            </div>
+                          </div>
+                          <div class="my-4"></div>
+                          <div class="row">
+                            <div class="col-sm-9 ms-auto">
+                              <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#myModal">Update</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal-->
+                  <div class="modal fade text-start" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="myModalLabel">Update Data</h5>
+                          <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Lengkapi Biodata Anda.</p>
+                          <form>
+                            <div class="mb-3">
+                              <label class="form-label" for="exampleInputEmail1">NIM</label>
+                              <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label" for="exampleInputEmail1">Nama</label>
+                              <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label" for="exampleInputEmail1">Jenis Kelamin</label>
+                              <select class="form-select mb-3" name="account">
+                                <option>Laki-Laki</option>
+                                <option>Perempuan</option>
+                              </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                              <label class="form-label" for="exampleInputEmail1">Program Studi</label>
+                              <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label" for="exampleInputEmail1">Alamat</label>
+                              <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                              <label class="form-label" for="exampleInputEmail1">Nomor Telepon</label>
+                              <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp">
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tutup</button>
+                          <button class="btn btn-primary" type="button">Simpan</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="modal-body">
-                    <form id="createForm">
-                        <div class="mb-3">
-                            <label for="createNIM" class="form-label">NIM</label>
-                            <input type="text" class="form-control" id="createNIM" name="NIM" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="createNama" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="createNama" name="Nama" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="createJenisKelamin" class="form-label">Jenis Kelamin</label>
-                            <select class="form-control" id="createJenisKelamin" name="Jenis Kelamin" required>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="createProdi" class="form-label">Program Studi</label>
-                            <input type="text" class="form-control" id="createProdi" name="Prodi" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="createAlamat" class="form-label">Alamat</label>
-                            <input type="text" class="form-control" id="createAlamat" name="Alamat" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="createTelepon" class="form-label">Telepon</label>
-                            <input type="text" class="form-control" id="createTelepon" name="Telepon" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
-                </div>
+              </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal Edit -->
-    <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalEditLabel">Edit Mahasiswa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="editForm">
-                        <div class="mb-3">
-                            <label for="editNIM" class="form-label">NIM</label>
-                            <input type="text" class="form-control" id="editNIM" name="NIM" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editNama" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="editNama" name="Nama" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editJenisKelamin" class="form-label">Jenis Kelamin</label>
-                            <select class="form-control" id="editJenisKelamin" name="Jenis Kelamin" required>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editProdi" class="form-label">Program Studi</label>
-                            <input type="text" class="form-control" id="editProdi" name="Prodi" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editAlamat" class="form-label">Alamat</label>
-                            <input type="text" class="form-control" id="editAlamat" name="Alamat" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editTelepon" class="form-label">Telepon</label>
-                            <input type="text" class="form-control" id="editTelepon" name="Telepon" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+              </div>
+            </section>
 
+        <!-- Page Footer-->
+        <footer class="position-absolute bottom-0 bg-dash-dark-2 text-white text-center py-3 w-100 text-xs" id="footer">
+          <div class="container-fluid text-center">
+            <!-- Please do not remove the backlink to us unless you support us at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+            <p class="mb-0 text-dash-gray">2021 &copy; Your company. Design by <a href="https://bootstrapious.com">Bootstrapious</a>.</p>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- JavaScript files-->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/just-validate/js/just-validate.min.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="js/charts-home.js"></script>
+    <!-- Main File-->
+    <script src="js/front.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            loadData();
-
-            function loadData() {
-                fetch('https://sheet.best/api/sheets/4ee74e4b-abc3-4858-a763-e6ad27ffdcbd')
-                    .then(response => response.json())
-                    .then(data => {
-                        const tableBody = document.querySelector("#mahasiswa-table tbody");
-                        tableBody.innerHTML = '';
-                        data.forEach((mahasiswa, index) => {
-                            const row = document.createElement("tr");
-                            row.innerHTML = `
-                            <td>${index + 1}</td>
-                            <td>${mahasiswa.NIM}</td>
-                            <td>${mahasiswa.Nama}</td>
-                            <td>${mahasiswa["Jenis Kelamin"]}</td>
-                            <td>${mahasiswa.Prodi}</td>
-                            <td>${mahasiswa.Alamat}</td>
-                            <td>${mahasiswa.Telepon}</td>
-                            <td>
-                                <button class="btn btn-sm btn-danger" onclick="deleteMahasiswa('${mahasiswa.NIM}')">Hapus</button>
-                                <button class="btn btn-sm btn-warning text-light" data-bs-toggle="modal" data-bs-target="#modalEdit" data-nim="${mahasiswa.NIM}">Edit</button>
-                            </td>
-                            `;
-                            tableBody.appendChild(row);
-                        });
-
-                        $('#mahasiswa-table').DataTable().destroy();
-                        $('#mahasiswa-table').DataTable();
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        const tableBody = document.querySelector("#mahasiswa-table tbody");
-                        const row = document.createElement("tr");
-                        row.innerHTML = '<td colspan="8" class="text-center">Gagal memuat data! Silakan coba lagi nanti.</td>';
-                        tableBody.appendChild(row);
-                    });
-            }
-
-            // Submit form create
-            document.getElementById("createForm").addEventListener("submit", function(event) {
-                event.preventDefault();
-                const formData = new FormData(event.target);
-                const mahasiswa = {};
-                formData.forEach((value, key) => {
-                    mahasiswa[key] = value;
-                });
-
-                fetch('https://sheet.best/api/sheets/4ee74e4b-abc3-4858-a763-e6ad27ffdcbd', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(mahasiswa)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    Swal.fire({
-                        title: 'Berhasil!',
-                        text: 'Data mahasiswa berhasil ditambahkan.',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    }).then(() => {
-                        $('#modalCreate').modal('hide');
-                        loadData(); // Reload data
-                        location.reload();
-                    });
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            });
-
-            // Populate form edit
-            $('#modalEdit').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-                var nim = button.data('nim');
-                var modal = $(this);
-                if (nim) {
-                    fetch(`https://sheet.best/api/sheets/4ee74e4b-abc3-4858-a763-e6ad27ffdcbd/NIM/${nim}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const mahasiswa = data[0];
-                            modal.find('#editNIM').val(mahasiswa.NIM); // Set value for editNIM input
-                            modal.find('#editNama').val(mahasiswa.Nama);
-                            modal.find('#editJenisKelamin').val(mahasiswa["Jenis Kelamin"]);
-                            modal.find('#editProdi').val(mahasiswa.Prodi);
-                            modal.find('#editAlamat').val(mahasiswa.Alamat);
-                            modal.find('#editTelepon').val(mahasiswa.Telepon);
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                }
-            });
-
-            // Submit form edit
-            document.getElementById("editForm").addEventListener("submit", function(event) {
-                event.preventDefault();
-                const formData = new FormData(event.target);
-                const mahasiswa = {};
-                formData.forEach((value, key) => {
-                    mahasiswa[key] = value;
-                });
-
-                const nim = document.getElementById("editNIM").value; // Get value from editNIM input
-
-                fetch(`https://sheet.best/api/sheets/4ee74e4b-abc3-4858-a763-e6ad27ffdcbd/NIM/${nim}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(mahasiswa)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    Swal.fire({
-                        title: 'Berhasil!',
-                        text: 'Data mahasiswa berhasil diupdate.',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    }).then(() => {
-                        $('#modalEdit').modal('hide');
-                        loadData(); // Reload data
-                        location.reload();
-                    });
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            });
-
-            window.deleteMahasiswa = function(nim) {
-                Swal.fire({
-                    title: 'Apakah anda yakin?',
-                    text: "Data ini akan dihapus!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya, hapus!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        fetch(`https://sheet.best/api/sheets/4ee74e4b-abc3-4858-a763-e6ad27ffdcbd/NIM/${nim}`, {
-                            method: 'DELETE'
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            Swal.fire(
-                                'Terhapus!',
-                                'Data mahasiswa telah dihapus.',
-                                'success'
-                                ).then(() => {
-                                    loadData();
-                                    location.reload();
-                                });
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                        });
-                    }
-            });
-            }
-        });
+      // ------------------------------------------------------- //
+      //   Inject SVG Sprite - 
+      //   see more here 
+      //   https://css-tricks.com/ajaxing-svg-sprite/
+      // ------------------------------------------------------ //
+      function injectSvgSprite(path) {
+      
+          var ajax = new XMLHttpRequest();
+          ajax.open("GET", path, true);
+          ajax.send();
+          ajax.onload = function(e) {
+          var div = document.createElement("div");
+          div.className = 'd-none';
+          div.innerHTML = ajax.responseText;
+          document.body.insertBefore(div, document.body.childNodes[0]);
+          }
+      }
+      // this is set to BootstrapTemple website as you cannot 
+      // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
+      // while using file:// protocol
+      // pls don't forget to change to your domain :)
+      injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg'); 
     </script>
-</body>
+    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  </body>
 </html>
