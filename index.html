@@ -7,6 +7,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Choices.js-->
     <link rel="stylesheet" href="vendor/choices.js/public/assets/styles/choices.min.css">
     <!-- Google fonts - Muli-->
@@ -109,7 +111,7 @@
                           <div class="my-4"></div>
                           <div class="row">
                             <div class="col-sm-9 ms-auto">
-                              <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#myModal">Update</button>
+                              <button class="btn btn-primary" id="updateButton" type="button" data-bs-toggle="modal" data-bs-target="#myModal">Update</button>
                             </div>
                           </div>
                         </form>
@@ -117,52 +119,54 @@
                     </div>
                   </div>
                   <!-- Modal-->
-                  <div class="modal fade text-start" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="myModalLabel">Update Data</h5>
-                          <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <p>Lengkapi Biodata Anda.</p>
-                          <form>
-                            <div class="mb-3">
-                              <label class="form-label" for="exampleInputEmail1">NIM</label>
-                              <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                              <label class="form-label" for="exampleInputEmail1">Nama</label>
-                              <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                              <label class="form-label" for="exampleInputEmail1">Jenis Kelamin</label>
-                              <select class="form-select mb-3" name="account">
-                                <option>Laki-Laki</option>
-                                <option>Perempuan</option>
-                              </select>
-                            </div>
-                            <div class="mb-3">
-                              <label class="form-label" for="exampleInputEmail1">Program Studi</label>
-                              <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                              <label class="form-label" for="exampleInputEmail1">Alamat</label>
-                              <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                              <label class="form-label" for="exampleInputEmail1">Nomor Telepon</label>
-                              <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp">
-                            </div>
-                          </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tutup</button>
-                          <button class="btn btn-primary" type="button">Simpan</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+<!-- Modal-->
+<div class="modal fade text-start" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Update Biodata</h5>
+        <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Lengkapi Biodata Anda.</p>
+        <form id="updateForm">
+          <div class="mb-3">
+            <label class="form-label" for="nimUpdate">NIM</label>
+            <input class="form-control text-dark" id="nimUpdate" type="text" aria-describedby="emailHelp" readonly>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="namaUpdate">Nama</label>
+            <input class="form-control" id="namaUpdate" type="text" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="jenisKelaminUpdate">Jenis Kelamin</label>
+            <select class="form-select mb-3" id="jenisKelaminUpdate" name="jenisKelaminUpdate">
+              <option value="Laki-Laki">Laki-Laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="prodiUpdate">Program Studi</label>
+            <input class="form-control" id="prodiUpdate" type="text" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="alamatUpdate">Alamat</label>
+            <input class="form-control" id="alamatUpdate" type="text" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="nomorTeleponUpdate">Nomor Telepon</label>
+            <input class="form-control" id="nomorTeleponUpdate" type="text" aria-describedby="emailHelp">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tutup</button>
+        <button class="btn btn-primary" id="simpanButton" type="button">Simpan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
                 </div>
               </div>
             </div>
@@ -212,15 +216,16 @@
       injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg'); 
     </script>
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
+      // Script untuk menampilkan biodata
+    document.addEventListener('DOMContentLoaded', function () {
+      // Fungsi untuk mendapatkan biodata dari API
       function getBiodata(username) {
         fetch('https://sheet.best/api/sheets/4ee74e4b-abc3-4858-a763-e6ad27ffdcbd')
           .then(response => response.json())
           .then(data => {
-            // console.log('Data dari API:', data);
             const biodata = data.find(user => user.NIM === username);
-            // console.log('Biodata yang ditemukan:', biodata);
             if (biodata) {
+              // Menampilkan biodata pada halaman
               document.querySelector('.nim-display').innerHTML = biodata.NIM;
               document.querySelector('.nama-display').innerHTML = biodata.Nama;
               document.getElementById('nim').value = biodata.NIM;
@@ -229,10 +234,10 @@
               document.getElementById('prodi').value = biodata.Prodi;
               document.getElementById('alamat').value = biodata.Alamat;
               document.getElementById('nomorTelepon').value = biodata.Telepon;
-          } else {
+            } else {
               console.error('Biodata tidak ditemukan');
               alert('Biodata tidak ditemukan');
-          }
+            }
           })
           .catch(error => {
             console.error('Error:', error);
@@ -240,15 +245,147 @@
           });
       }
 
+      // Panggil fungsi getBiodata setelah DOM dimuat
       const username = localStorage.getItem('username');
-      // console.log('Username dari local storage:', username);
       if (username) {
         getBiodata(username);
       } else {
         console.error('Username tidak ditemukan di local storage');
       }
+
+      // Tambahkan event listener pada tombol "Update" di bagian kartu biodata
+      document.getElementById('updateButton').addEventListener('click', function () {
+        const nim = document.getElementById('nim').value;
+        const nama = document.getElementById('nama').value;
+        const jenisKelamin = document.getElementById('jenisKelamin').value;
+        const prodi = document.getElementById('prodi').value;
+        const alamat = document.getElementById('alamat').value;
+        const nomorTelepon = document.getElementById('nomorTelepon').value;
+
+        // Set nilai input pada modal dengan nilai biodata yang ada
+        document.getElementById('nimUpdate').value = nim;
+        document.getElementById('namaUpdate').value = nama;
+        document.getElementById('jenisKelaminUpdate').value = jenisKelamin;
+        document.getElementById('prodiUpdate').value = prodi;
+        document.getElementById('alamatUpdate').value = alamat;
+        document.getElementById('nomorTeleponUpdate').value = nomorTelepon;
+
+        // Tampilkan modal
+        $('#myModal').modal('show');
+      });
     });
 
+    // Script untuk memperbarui biodata
+   // Script untuk menampilkan dan memperbarui biodata
+document.addEventListener('DOMContentLoaded', function () {
+  // Fungsi untuk mendapatkan biodata dari API
+  function getBiodata(username) {
+    fetch('https://sheet.best/api/sheets/4ee74e4b-abc3-4858-a763-e6ad27ffdcbd')
+      .then(response => response.json())
+      .then(data => {
+        const biodata = data.find(user => user.NIM === username);
+        if (biodata) {
+          // Menampilkan biodata pada halaman
+          document.querySelector('.nim-display').innerHTML = biodata.NIM;
+          document.querySelector('.nama-display').innerHTML = biodata.Nama;
+          document.getElementById('nim').value = biodata.NIM;
+          document.getElementById('nama').value = biodata.Nama;
+          document.getElementById('jenisKelamin').value = biodata["Jenis Kelamin"];
+          document.getElementById('prodi').value = biodata.Prodi;
+          document.getElementById('alamat').value = biodata.Alamat;
+          document.getElementById('nomorTelepon').value = biodata.Telepon;
+        } else {
+          console.error('Biodata tidak ditemukan');
+          alert('Biodata tidak ditemukan');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan saat memuat biodata.');
+      });
+  }
+
+  // Panggil fungsi getBiodata setelah DOM dimuat
+  const username = localStorage.getItem('username');
+  if (username) {
+    getBiodata(username);
+  } else {
+    console.error('Username tidak ditemukan di local storage');
+  }
+
+  // Tambahkan event listener pada tombol "Update" di bagian kartu biodata
+  document.getElementById('updateButton').addEventListener('click', function () {
+    const nim = document.getElementById('nim').value;
+    const nama = document.getElementById('nama').value;
+    const jenisKelamin = document.getElementById('jenisKelamin').value;
+    const prodi = document.getElementById('prodi').value;
+    const alamat = document.getElementById('alamat').value;
+    const nomorTelepon = document.getElementById('nomorTelepon').value;
+
+    // Set nilai input pada modal dengan nilai biodata yang ada
+    document.getElementById('nimUpdate').value = nim;
+    document.getElementById('namaUpdate').value = nama;
+    document.getElementById('jenisKelaminUpdate').value = jenisKelamin;
+    document.getElementById('prodiUpdate').value = prodi;
+    document.getElementById('alamatUpdate').value = alamat;
+    document.getElementById('nomorTeleponUpdate').value = nomorTelepon;
+
+    // Tampilkan modal
+    $('#myModal').modal('show');
+  });
+
+  // Script untuk memperbarui biodata
+  function updateBiodata(nim, data) {
+    fetch(`https://sheet.best/api/sheets/4ee74e4b-abc3-4858-a763-e6ad27ffdcbd/NIM/${nim}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => {
+      if (response.ok) {
+          // Tutup modal setelah pembaruan berhasil
+          $('#myModal').modal('hide');
+          // Muat ulang data setelah pembaruan berhasil
+          getBiodata(localStorage.getItem('username'));
+          // Tampilkan pesan sukses
+          alert('Data berhasil diperbarui!');
+          getBiodata(localStorage.getItem('username'));
+      } else {
+          throw new Error('Terjadi kesalahan saat memperbarui data');
+      }
+    })
+    .catch(error => {
+        // Tampilkan pesan kesalahan jika terjadi kesalahan
+        console.error('Error:', error);
+        alert('Terjadi kesalahan saat memperbarui data.');
+    });
+  }
+
+  // Event listener untuk tombol "Simpan" di modal
+  document.getElementById('simpanButton').addEventListener('click', function () {
+    const nim = document.getElementById('nimUpdate').value;
+    const nama = document.getElementById('namaUpdate').value;
+    const jenisKelamin = document.getElementById('jenisKelaminUpdate').value;
+    const prodi = document.getElementById('prodiUpdate').value;
+    const alamat = document.getElementById('alamatUpdate').value;
+    const nomorTelepon = document.getElementById('nomorTeleponUpdate').value;
+
+    // Data yang akan diperbarui
+    const data = {
+        NIM: nim,
+        Nama: nama,
+        "Jenis Kelamin": jenisKelamin,
+        Prodi: prodi,
+        Alamat: alamat,
+        Telepon: nomorTelepon,
+    };
+
+    // Panggil fungsi untuk memperbarui biodata
+    updateBiodata(nim, data);
+    });
+  });
     </script>
     <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
