@@ -92,9 +92,40 @@
       // while using file:// protocol
       // pls don't forget to change to your domain :)
       injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg'); 
-      
-      
     </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          const form = document.querySelector('.login-form');
+
+          form.addEventListener('submit', function (event) {
+              event.preventDefault(); // Hindari pengiriman formulir secara langsung
+
+              const username = document.getElementById('login-username').value;
+              const password = document.getElementById('login-password').value;
+
+              // Kirim permintaan ke API untuk memeriksa kredensial
+              fetch('https://sheet.best/api/sheets/d0a09569-278b-4bcd-8b28-f82a7591cbeb')
+                  .then(response => response.json())
+                  .then(data => {
+                      const user = data.find(user => user.username === username && user.password === password);
+                      if (user) {
+                          // Kredensial cocok, redirect ke index.html
+                          window.location.href = 'index.html';
+                      } else {
+                          // Kredensial tidak cocok, tampilkan pesan kesalahan
+                          alert('Username atau password salah.');
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Error:', error);
+                      alert('Terjadi kesalahan saat melakukan autentikasi.');
+                  });
+          });
+      });
+    </script>
+
+
     <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   </body>
