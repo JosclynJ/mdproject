@@ -28,8 +28,8 @@
         <!-- Sidebar Header-->
         <div class="sidebar-header d-flex align-items-center p-4"><img class="avatar shadow-0 img-fluid rounded-circle" src="img/avatar-6.jpg" alt="...">
           <div class="ms-3 title">
-            <h1 class="h5 mb-1">Nama</h1>
-            <p class="text-sm text-gray-700 mb-0 lh-1">NIM</p>
+            <h1 class="h5 mb-1 nama-display"></h1>
+            <p class="text-sm text-gray-700 mb-0 lh-1 nim-display"></p>
           </div>
         </div><span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
         <ul class="list-unstyled">
@@ -68,42 +68,42 @@
                           <div class="row">
                             <label class="col-sm-3 form-label">NIM</label>
                             <div class="col-sm-9">
-                              <input class="form-control text-dark" type="text" readonly>
+                              <input id="nim" class="form-control text-dark" type="text" readonly>
                             </div>
                           </div>
                           <div class="my-4"></div>
                           <div class="row">
                             <label class="col-sm-3 form-label">Nama</label>
                             <div class="col-sm-9">
-                              <input class="form-control text-dark" type="text" readonly>
+                              <input id="nama" class="form-control text-dark" type="text" readonly>
                             </div>
                           </div>
                           <div class="my-4"></div>
                           <div class="row">
                             <label class="col-sm-3 form-label">Jenis Kelamin</label>
                             <div class="col-sm-9">
-                              <input class="form-control text-dark" type="text" readonly>
+                              <input id="jenisKelamin" class="form-control text-dark" type="text" readonly>
                             </div>
                           </div>
                           <div class="my-4"></div>
                           <div class="row">
                             <label class="col-sm-3 form-label">Program Studi</label>
                             <div class="col-sm-9">
-                              <input class="form-control text-dark" type="text" readonly>
+                              <input id="prodi" class="form-control text-dark" type="text" readonly>
                             </div>
                           </div>
                           <div class="my-4"></div>
                           <div class="row">
                             <label class="col-sm-3 form-label">Alamat</label>
                             <div class="col-sm-9">
-                              <input class="form-control text-dark" type="text" readonly>
+                              <input id="alamat" class="form-control text-dark" type="text" readonly>
                             </div>
                           </div>
                           <div class="my-4"></div>
                           <div class="row">
                             <label class="col-sm-3 form-label">Nomor telepon</label>
                             <div class="col-sm-9">
-                              <input class="form-control text-dark" type="text" readonly>
+                              <input id="nomorTelepon" class="form-control text-dark" type="text" readonly>
                             </div>
                           </div>
                           <div class="my-4"></div>
@@ -210,6 +210,45 @@
       // while using file:// protocol
       // pls don't forget to change to your domain :)
       injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg'); 
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+      function getBiodata(username) {
+        fetch('https://sheet.best/api/sheets/4ee74e4b-abc3-4858-a763-e6ad27ffdcbd')
+          .then(response => response.json())
+          .then(data => {
+            // console.log('Data dari API:', data);
+            const biodata = data.find(user => user.NIM === username);
+            // console.log('Biodata yang ditemukan:', biodata);
+            if (biodata) {
+              document.querySelector('.nim-display').innerHTML = biodata.NIM;
+              document.querySelector('.nama-display').innerHTML = biodata.Nama;
+              document.getElementById('nim').value = biodata.NIM;
+              document.getElementById('nama').value = biodata.Nama;
+              document.getElementById('jenisKelamin').value = biodata["Jenis Kelamin"];
+              document.getElementById('prodi').value = biodata.Prodi;
+              document.getElementById('alamat').value = biodata.Alamat;
+              document.getElementById('nomorTelepon').value = biodata.Telepon;
+          } else {
+              console.error('Biodata tidak ditemukan');
+              alert('Biodata tidak ditemukan');
+          }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat memuat biodata.');
+          });
+      }
+
+      const username = localStorage.getItem('username');
+      // console.log('Username dari local storage:', username);
+      if (username) {
+        getBiodata(username);
+      } else {
+        console.error('Username tidak ditemukan di local storage');
+      }
+    });
+
     </script>
     <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
